@@ -18,6 +18,9 @@ type
     lblId: TLabel;
     edtId: TDBEdit;
     lblNav: TLabel;
+    Label1: TLabel;
+    memLog: TMemo;
+    procedure FormActivate(Sender: TObject);
   private
     { Private declarations }
   public
@@ -30,5 +33,10 @@ var
 implementation
 
 {$R *.dfm}
+
+procedure TMainForm.FormActivate(Sender: TObject);
+begin
+  MainModule.LogLines := memLog.Lines;
+end;
 
 end.

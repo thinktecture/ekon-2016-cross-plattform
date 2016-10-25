@@ -2,8 +2,8 @@ object MainForm: TMainForm
   Left = 0
   Top = 0
   Caption = 'Delphi App'
-  ClientHeight = 191
-  ClientWidth = 366
+  ClientHeight = 471
+  ClientWidth = 838
   Color = clBtnFace
   Constraints.MinHeight = 230
   Constraints.MinWidth = 382
@@ -13,9 +13,10 @@ object MainForm: TMainForm
   Font.Name = 'Tahoma'
   Font.Style = []
   OldCreateOrder = False
+  OnActivate = FormActivate
   DesignSize = (
-    366
-    191)
+    838
+    471)
   PixelsPerInch = 96
   TextHeight = 13
   object lblSource: TLabel
@@ -23,7 +24,6 @@ object MainForm: TMainForm
     Top = 164
     Width = 37
     Height = 13
-    Anchors = [akLeft, akBottom]
     Caption = 'Source:'
   end
   object lblQuote: TLabel
@@ -47,15 +47,23 @@ object MainForm: TMainForm
     Height = 13
     Caption = 'Navigation:'
   end
+  object Label1: TLabel
+    Left = 8
+    Top = 193
+    Width = 21
+    Height = 13
+    Caption = 'Log:'
+  end
   object memQuote: TDBMemo
     Left = 72
     Top = 66
-    Width = 280
-    Height = 89
-    Anchors = [akLeft, akTop, akRight, akBottom]
+    Width = 752
+    Height = 91
+    Anchors = [akLeft, akTop, akRight]
     DataField = 'quote'
     DataSource = MainModule.dtsQuotes
     TabOrder = 0
+    ExplicitWidth = 280
   end
   object nvgQuotes: TDBNavigator
     Left = 72
@@ -67,23 +75,33 @@ object MainForm: TMainForm
   end
   object edtSource: TDBEdit
     Left = 72
-    Top = 161
-    Width = 280
+    Top = 163
+    Width = 752
     Height = 21
-    Anchors = [akLeft, akRight, akBottom]
+    Anchors = [akLeft, akTop, akRight]
     DataField = 'source'
     DataSource = MainModule.dtsQuotes
     TabOrder = 2
+    ExplicitWidth = 280
   end
   object edtId: TDBEdit
     Left = 72
     Top = 39
-    Width = 280
+    Width = 752
     Height = 21
     Anchors = [akLeft, akTop, akRight]
     DataField = 'id'
     DataSource = MainModule.dtsQuotes
     ReadOnly = True
     TabOrder = 3
+    ExplicitWidth = 280
+  end
+  object memLog: TMemo
+    Left = 72
+    Top = 190
+    Width = 752
+    Height = 273
+    Anchors = [akLeft, akTop, akRight, akBottom]
+    TabOrder = 4
   end
 end

@@ -24,6 +24,7 @@ type
     procedure tblQuotesAfterInsert(DataSet: TDataSet);
     procedure DataModuleCreate(Sender: TObject);
   private
+    fLog: TStrings;
     function GetRandomQuote(): string;
     function GetAllQuotes(): string;
     function CreateJsonObjectFromQueryValue(query: TZReadOnlyQuery): TJsonValue;
@@ -35,7 +36,9 @@ type
     procedure OnPost(AContext: TIdContext; ARequestInfo: TIdHTTPRequestInfo; AResponseInfo: TIdHTTPResponseInfo);
     procedure OnDelete(AContext: TIdContext; ARequestInfo: TIdHTTPRequestInfo; AResponseInfo: TIdHTTPResponseInfo);
     procedure OnPut(AContext: TIdContext; ARequestInfo: TIdHTTPRequestInfo; AResponseInfo: TIdHTTPResponseInfo);
+    procedure Log(message: string);
   public
+    property LogLines: TStrings read fLog write fLog;
   end;
 
 var
@@ -105,6 +108,14 @@ end;
 procedure TMainModule.tblQuotesAfterInsert(DataSet: TDataSet);
 begin
   tblQuotes.FieldByName('id').Value := GetNewGuid();
+end;
+
+procedure TMainModule.Log(message: string);
+begin
+  if not (fLog = nil) then
+  begin
+    fLog.Add(message);
+  end;
 end;
 
 { Data Access Methods for the Http Web API }
@@ -200,6 +211,8 @@ procedure TMainModule.OnSrvMainCommand(AContext: TIdContext;
 begin
   // first, prepare CORS (the hardcore way, NEVER use in production!):
   ARequestInfo.CustomHeaders.AddValue('Access-Control-Allow-Origin', '*');
+
+  Log(ARequestInfo.Command + '  ' + ARequestInfo.URI + '  from ' + AContext.Connection.Socket.Binding.PeerIP);
 
   case ARequestInfo.CommandType of
     THTTPCommandType.hcOPTION: OnOption(AContext, ARequestInfo, AResponseInfo);
