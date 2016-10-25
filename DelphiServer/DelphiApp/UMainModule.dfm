@@ -75,4 +75,45 @@ object MainModule: TMainModule
         ParamType = ptInput
       end>
   end
+  object qryAddQuote: TZReadOnlyQuery
+    Connection = SqliteConnection
+    SQL.Strings = (
+      
+        'INSERT INTO quotes (id, quote, source) VALUES (:id, :quote, :sou' +
+        'rce);')
+    Params = <
+      item
+        DataType = ftString
+        Name = 'id'
+        ParamType = ptInput
+      end
+      item
+        DataType = ftString
+        Name = 'quote'
+        ParamType = ptInput
+      end
+      item
+        DataType = ftString
+        Name = 'source'
+        ParamType = ptInput
+      end>
+    Left = 144
+    Top = 304
+    ParamData = <
+      item
+        DataType = ftString
+        Name = 'id'
+        ParamType = ptInput
+      end
+      item
+        DataType = ftString
+        Name = 'quote'
+        ParamType = ptInput
+      end
+      item
+        DataType = ftString
+        Name = 'source'
+        ParamType = ptInput
+      end>
+  end
 end

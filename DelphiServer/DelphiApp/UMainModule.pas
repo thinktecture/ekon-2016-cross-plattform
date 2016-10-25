@@ -6,7 +6,7 @@ uses
   System.SysUtils, System.Classes, IdContext, IdCustomHTTPServer,
   IdBaseComponent, IdComponent, IdCustomTCPServer, IdHTTPServer, Data.DB,
   ZAbstractRODataset, ZAbstractDataset, ZAbstractTable, ZDataset,
-  ZAbstractConnection, ZConnection, JSON, IdURI;
+  ZAbstractConnection, ZConnection, JSON, IdURI, IdGlobal;
 
 type
   TMainModule = class(TDataModule)
@@ -17,6 +17,7 @@ type
     qryRandomQuote: TZReadOnlyQuery;
     qryLoadAllQuotes: TZReadOnlyQuery;
     qryDeleteQuote: TZQuery;
+    qryAddQuote: TZReadOnlyQuery;
     procedure OnSrvMainCommand(AContext: TIdContext;
       ARequestInfo: TIdHTTPRequestInfo; AResponseInfo: TIdHTTPResponseInfo);
     procedure SqliteConnectionAfterConnect(Sender: TObject);
@@ -27,6 +28,7 @@ type
     function GetAllQuotes(): string;
     function CreateJsonObjectFromQueryValue(query: TZReadOnlyQuery): TJsonValue;
     function DeleteQuote(quoteId: string): boolean;
+    function AddQuote(quote: string; source: string): string;
   protected
     procedure OnOption(AContext: TIdContext; ARequestInfo: TIdHTTPRequestInfo; AResponseInfo: TIdHTTPResponseInfo);
     procedure OnGet(AContext: TIdContext; ARequestInfo: TIdHTTPRequestInfo; AResponseInfo: TIdHTTPResponseInfo);
@@ -92,12 +94,17 @@ begin
   SqliteConnection.AutoCommit := true;
 end;
 
-procedure TMainModule.tblQuotesAfterInsert(DataSet: TDataSet);
+function GetNewGuid(): string;
 var
    newId: TGuid;
 begin
   CreateGUID(newId);
-  tblQuotes.Fields[0].Value := GUIDToString(newId);
+  result := GUIDToString(newId);
+end;
+
+procedure TMainModule.tblQuotesAfterInsert(DataSet: TDataSet);
+begin
+  tblQuotes.FieldByName('id').Value := GetNewGuid();
 end;
 
 { Data Access Methods for the Http Web API }
@@ -168,7 +175,25 @@ begin
     tblQuotes.Refresh();
 end;
 
-{ Actual HTTP Methods }
+function TMainModule.AddQuote(quote: string; source: string): string;
+begin
+  result := GetNewGuid();
+  qryAddQuote.Params[0].Value := result;
+  qryAddQuote.Params[1].Value := quote;
+  qryAddQuote.Params[2].Value := source;
+
+  qryAddQuote.ExecSQL();
+
+  if (qryAddQuote.RowsAffected >= 1) then
+  begin
+    tblQuotes.Refresh();
+  end else begin
+    result := '';
+  end;
+end;
+
+
+{ Actual HTTP Methodis }
 
 procedure TMainModule.OnSrvMainCommand(AContext: TIdContext;
   ARequestInfo: TIdHTTPRequestInfo; AResponseInfo: TIdHTTPResponseInfo);
@@ -206,8 +231,28 @@ begin
 end;
 
 procedure TMainModule.OnPost(AContext: TIdContext; ARequestInfo: TIdHTTPRequestInfo; AResponseInfo: TIdHTTPResponseInfo);
+var
+  requestContent: string;
+  data: TJSONValue;
+  newId: string;
 begin
+  if (ARequestInfo.URI.StartsWith('/add')) then
+  begin
+    requestContent := ReadStringFromStream(ARequestInfo.PostStream);
 
+    data := TJSONObject.ParseJSONValue(requestContent);
+
+    newId := AddQuote(data.GetValue<string>('quote'), data.GetValue<string>('source'));
+
+    if (not (newId = '')) then
+    begin
+      AResponseInfo.ContentText := '{ "status": "created", "id": "' + newId + '" }';
+    end else begin
+      AResponseInfo.ResponseNo := 500;
+      AResponseInfo.ContentText := '{ "status": "could not create entry" }';
+    end;
+
+  end;
 end;
 
 procedure TMainModule.OnDelete(AContext: TIdContext; ARequestInfo: TIdHTTPRequestInfo; AResponseInfo: TIdHTTPResponseInfo);
