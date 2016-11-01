@@ -1,0 +1,5 @@
+<div id="toast-container" *ngIf="notification">
+    <div class="toast" [ngClass]="{ 'red': notification.type === NotificationType.error, 'green': notification.type === NotificationType.success }">
+        {{ notification.message }}
+    </div>
+</div>
