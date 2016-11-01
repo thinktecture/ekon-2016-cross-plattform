@@ -30,15 +30,13 @@ export class ListComponent implements OnInit {
     public delete(quote: Quote): void {
         this._quoteService.delete(quote)
             .subscribe(() => {
-                    this._notificationService.success('Zitat erfolgreich gelöscht.')
+                    this._notificationService.success('Zitat erfolgreich gelöscht.');
                     this.loadQuotes();
                 },
                 error => {
                     console.log(error);
                     this._notificationService.error('Zitat konnte nicht gelöscht werden.');
                 }
+            );
     }
-
-);
-}
 }
