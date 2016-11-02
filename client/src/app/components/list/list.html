@@ -1,0 +1,9 @@
+<ul class="collection" *ngIf="quotes">
+    <li class="collection-item" *ngFor="let quote of quotes">
+        <div>
+            {{ quote.quote }}<br>
+            <span class="quote-source">{{ quote.source }}</span>
+            <a class="secondary-content" (click)="delete(quote)"><i class="material-icons">delete</i></a>
+        </div>
+    </li>
+</ul>

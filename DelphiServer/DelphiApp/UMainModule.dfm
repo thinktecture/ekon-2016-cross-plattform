@@ -17,7 +17,6 @@ object MainModule: TMainModule
   object SqliteConnection: TZConnection
     ControlsCodePage = cCP_UTF16
     Catalog = 'quotes'
-    Connected = True
     AfterConnect = SqliteConnectionAfterConnect
     HostName = ''
     Port = 0

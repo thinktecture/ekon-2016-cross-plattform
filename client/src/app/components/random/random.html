@@ -1,0 +1,13 @@
+<ul class="collection" *ngIf="quote">
+    <li class="collection-item">
+        <p>{{ quote.quote }}</p>
+        <p class="quote-source">{{ quote.source }}</p>
+    </li>
+</ul>
+<div class="row">
+    <div class="col s12">
+        <button class="btn waves-effect waves-light blue" [routerLink]="['list']">Alle Zitate
+            <i class="material-icons right">list</i>
+        </button>
+    </div>
+</div>

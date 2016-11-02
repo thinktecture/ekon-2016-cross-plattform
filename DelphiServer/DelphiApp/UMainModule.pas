@@ -210,7 +210,8 @@ procedure TMainModule.OnSrvMainCommand(AContext: TIdContext;
   ARequestInfo: TIdHTTPRequestInfo; AResponseInfo: TIdHTTPResponseInfo);
 begin
   // first, prepare CORS (the hardcore way, NEVER use in production!):
-  ARequestInfo.CustomHeaders.AddValue('Access-Control-Allow-Origin', '*');
+  AResponseInfo.CustomHeaders.AddValue('Access-Control-Allow-Origin', '*');
+  AResponseInfo.CustomHeaders.AddValue('Access-Control-Allow-Methods', 'POST, GET, OPTIONS, DELETE');
 
   Log(ARequestInfo.Command + '  ' + ARequestInfo.URI + '  from ' + AContext.Connection.Socket.Binding.PeerIP);
 
