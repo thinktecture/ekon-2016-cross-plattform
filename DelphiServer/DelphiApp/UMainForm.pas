@@ -20,7 +20,9 @@ type
     lblNav: TLabel;
     Label1: TLabel;
     memLog: TMemo;
+    btnClearLog: TButton;
     procedure FormActivate(Sender: TObject);
+    procedure btnClearLogClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -33,6 +35,11 @@ var
 implementation
 
 {$R *.dfm}
+
+procedure TMainForm.btnClearLogClick(Sender: TObject);
+begin
+  memLog.Lines.Clear();
+end;
 
 procedure TMainForm.FormActivate(Sender: TObject);
 begin

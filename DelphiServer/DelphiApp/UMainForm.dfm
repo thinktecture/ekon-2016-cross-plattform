@@ -63,7 +63,6 @@ object MainForm: TMainForm
     DataField = 'quote'
     DataSource = MainModule.dtsQuotes
     TabOrder = 0
-    ExplicitWidth = 280
   end
   object nvgQuotes: TDBNavigator
     Left = 72
@@ -82,7 +81,6 @@ object MainForm: TMainForm
     DataField = 'source'
     DataSource = MainModule.dtsQuotes
     TabOrder = 2
-    ExplicitWidth = 280
   end
   object edtId: TDBEdit
     Left = 72
@@ -94,7 +92,6 @@ object MainForm: TMainForm
     DataSource = MainModule.dtsQuotes
     ReadOnly = True
     TabOrder = 3
-    ExplicitWidth = 280
   end
   object memLog: TMemo
     Left = 72
@@ -103,5 +100,14 @@ object MainForm: TMainForm
     Height = 273
     Anchors = [akLeft, akTop, akRight, akBottom]
     TabOrder = 4
+  end
+  object btnClearLog: TButton
+    Left = 8
+    Top = 212
+    Width = 58
+    Height = 25
+    Caption = 'Clear'
+    TabOrder = 5
+    OnClick = btnClearLogClick
   end
 end
