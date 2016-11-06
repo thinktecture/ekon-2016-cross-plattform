@@ -70,7 +70,7 @@ begin
   SqliteConnection.Commit();
 
   sql := 'INSERT OR IGNORE INTO quotes (id, quote, source) VALUES'
-       + '("{723ccaec-5437-441b-98f8-64c0494517b5}", """Und das? Was ist das?""" || char(13) || char(10) || """Das ist blaues Licht.""" || char(13) || char(10) || """Und was macht es?""" || char(13) || char(10) || """Es leuchtet blau.""", "Rambo III"),'
+       + '("{723ccaec-5437-441b-98f8-64c0494517b5}", "Und das? Was ist das? Das ist blaues Licht. Und was macht es? Es leuchtet blau.", "Rambo III"),'
        + '("{690edfd1-1d49-47ca-a9b1-9b884672906b}", "Whisky ist gut gegen Schlangenbisse, darum sollte er in keinem Schlafzimmer fehlen.", "Brendan Behan"),'
        + '("{3a96ecd1-2385-40e4-af6a-949f998c0214}", "Das Reh springt hoch, das Reh springt weit, wieso auch nicht es hat ja Zeit.", "Heinz Erhardt"),'
        + '("{5f7094d0-b745-4b91-b32f-da6c419c639f}", "Wir sollten nicht versuchen unsere Probleme zu lösen, sondern versuchen uns von den Problemen zu lösen.", "Kirpal Singh"),'
@@ -89,7 +89,7 @@ begin
        + '("{7c01bb69-3573-4c67-aa7d-4e0e9c62a5e7}", "Wer einen Fehler gemacht hat und ihn nicht korrigiert, begeht einen zweiten.", "Konfuzius"),'
        + '("{48bc518d-9539-4831-b36d-9bb047f6b3a6}", "Dumm ist der, der dummes tut.", "Forrest Gump (1994)"),'
        + '("{fc582f69-42b7-4750-9fbe-d5011357a6db}", "Kämpfen nicht gut! Aber wenn kämpfen, dann gewinnen!", "Karate Kid (1984)"),'
-       + '("{344fdc31-2170-42fc-bafc-6bb52d226ba3}", """Was machen Sie beruflich?""" || char(13) || char(10) ||' + '"""Nichts, was auf einem Formular besonders gut aussähe.""" || char(13) || char(10) || """Und das wäre?""" || char(13) || char(10) || """Ich bringe Menschen um.""", "James Bond 007 - Spectre");';
+       + '("{344fdc31-2170-42fc-bafc-6bb52d226ba3}", "Was machen Sie beruflich? Nichts, was auf einem Formular besonders gut aussähe. Und das wäre? Ich bringe Menschen um.", "James Bond 007 - Spectre");';
 
   SqliteConnection.ExecuteDirect(sql);
   SqliteConnection.Commit();
