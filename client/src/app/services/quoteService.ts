@@ -15,7 +15,7 @@ export class QuoteService {
     constructor(private _http: Http) {
         //this._apiUrl = 'http://10.211.55.20:20000/relay/link/delphi';
         this._apiUrl = 'http://10.211.55.19:8000';
-        this._defaultTimeout = 5000;
+        this._defaultTimeout = 3000;
     }
 
     private getEndpoint(method: string) {
