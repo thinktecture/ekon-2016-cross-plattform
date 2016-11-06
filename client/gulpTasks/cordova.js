@@ -122,7 +122,7 @@ gulp.task('cordova-start-ios', (done) => {
 
 gulp.task('cordova:emulate-ios', () => {
     executeInCordovaFolder(() => {
-        sh.exec('$(npm bin)/cordova emulate ios --target="iPhone-7-Plus, 10.0"');
+        sh.exec('$(npm bin)/cordova emulate ios --target="iPhone-7-Plus, 10.1"');
     });
 });
 
