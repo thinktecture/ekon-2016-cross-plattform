@@ -11,6 +11,8 @@ import {AddComponent} from './components/add/add';
 import {InputFieldComponent} from './components/inputField/inputField';
 import {NotificationService} from './services/notificationService';
 import {NotificationComponent} from './components/notification/notification';
+import {PlatformService} from './services/platformService';
+import {DesktopService} from './services/desktopService';
 
 @NgModule({
     imports: [
@@ -31,7 +33,9 @@ import {NotificationComponent} from './components/notification/notification';
     providers: [
         appRoutingProviders,
         QuoteService,
-        NotificationService
+        NotificationService,
+        PlatformService,
+        DesktopService
     ]
 })
 export class AppModule {
