@@ -1,0 +1,36 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <PropertyGroup>
+        <ProjectGuid>{5CCB566B-1525-486C-BB2E-800070F37E4E}</ProjectGuid>
+    </PropertyGroup>
+    <ItemGroup>
+        <Projects Include="DelphiServer\DelphiApp\DelphiApp.dproj">
+            <Dependencies/>
+        </Projects>
+    </ItemGroup>
+    <ProjectExtensions>
+        <Borland.Personality>Default.Personality.12</Borland.Personality>
+        <Borland.ProjectType/>
+        <BorlandProject>
+            <Default.Personality/>
+        </BorlandProject>
+    </ProjectExtensions>
+    <Target Name="DelphiApp">
+        <MSBuild Projects="DelphiServer\DelphiApp\DelphiApp.dproj"/>
+    </Target>
+    <Target Name="DelphiApp:Clean">
+        <MSBuild Projects="DelphiServer\DelphiApp\DelphiApp.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="DelphiApp:Make">
+        <MSBuild Projects="DelphiServer\DelphiApp\DelphiApp.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="Build">
+        <CallTarget Targets="DelphiApp"/>
+    </Target>
+    <Target Name="Clean">
+        <CallTarget Targets="DelphiApp:Clean"/>
+    </Target>
+    <Target Name="Make">
+        <CallTarget Targets="DelphiApp:Make"/>
+    </Target>
+    <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
+</Project>

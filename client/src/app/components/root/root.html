@@ -1,0 +1,22 @@
+<header>
+    <div class="navbar-fixed">
+        <nav class="blue darken-3">
+            <div class="nav-wrapper container ">
+                <a class="brand-logo" [routerLink]="['/']">EKON 20 - Quotes</a>
+            </div>
+        </nav>
+    </div>
+</header>
+<main>
+    <div class="container">
+        <div class="section">
+            <router-outlet></router-outlet>
+        </div>
+    </div>
+    <div class="fixed-action-btn" style="bottom: 45px; right: 24px;">
+        <a class="btn-floating btn-large green lighten-1" [routerLink]="['/add']">
+            <i class="material-icons">add</i>
+        </a>
+    </div>
+    <notification></notification>
+</main>
