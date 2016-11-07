@@ -5,7 +5,7 @@ const path = require('path');
 const currentPackage = require('../package.json');
 
 const config = {
-    name: 'EKON 2016 - Quotes',
+    name: 'EKON 20 - Quotes',
     module: currentPackage.name,
     version: currentPackage.version,
     base: 'src',

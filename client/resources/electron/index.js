@@ -138,6 +138,6 @@ let buildTrayIcon = () => {
     ]);
 
     trayApp = new electron.Tray(trayIconPath);
-    trayApp.setToolTip('EKON 2016 - Zitate');
+    trayApp.setToolTip('EKON 20 - Quotes');
     trayApp.setContextMenu(contextMenu);
 };
