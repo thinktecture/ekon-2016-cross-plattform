@@ -1,6 +1,6 @@
 # EKON 20 - November 2016
 
-This is a sample demo application for demonstrating how you could build modern cross-platform applications - with node.js, TypeScript, Angular2, Cordova, and Electron.
+Dieses Repository beinhaltet eine Demo-Anwendung, die demonstriert wie man mit node.js, TypeScript, Angular2, Cordova und Electron eine moderne Cross-Plattform-Applikation erstellt.
 
 ##Voraussetzungen
 * Node: https://nodejs.org/en/
